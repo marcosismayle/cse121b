@@ -5,7 +5,7 @@
 /* Step 2 - Variables */
 let fullName = 'Marcos Ismayle da Silva Ribeiro';
 let currentYear = new Date().getFullYear();
-let profilePicture = '/images/profile.jpg';
+let profilePicture = 'https://marcosismayle.github.io/images/profile.jpg';
 
 /* Step 3 - Element Variables */
 const nameElement = document.getElementById('name');
