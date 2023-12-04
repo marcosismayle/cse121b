@@ -6,7 +6,9 @@ let templeList = [];
 
 /* async displayTemples Function */
 const displayTemples = (temples) => {
-    templeList.forEach(temple => {
+    templesElement.innerHTML = '';
+
+    temples.forEach(temple => {
         const articleElement = document.createElement('article');
         const h3Element = document.createElement('h3');
         const imgElement = document.createElement('img');
@@ -28,9 +30,7 @@ const getTemples = async () => {
     try {
         const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
         
-        const templeList = await response.json();
-
-        window.templeList = templeList;
+        templeList = await response.json();
 
         displayTemples(templeList);
 
@@ -42,46 +42,34 @@ const getTemples = async () => {
 
 /* reset Function */
 const reset = () => {
-    const templesElement = document.getElementById('templesElement');
-
     templesElement.innerHTML = '';
-}
+};
 
-const sortBy = (temples) => {
-
-    reset();
-
+const sortBy = () => {
     const filter = document.getElementById('sortBy').value;
 
     switch (filter) {
-      case 'utah':
-        displayTemples(temples.filter(temple => temple.location.includes('Utah')));
-        break;
-      case 'nonutah':
-        displayTemples(temples.filter(temple => !temple.location.includes('Utah')));
-        break;
-      case 'older':
-        const cutoffDate = new Date(1950, 0, 1);
-        displayTemples(temples.filter(temple => new Date(temple.dedicated) < cutoffDate));
-        break;
-      case 'all':
-        displayTemples(temples);
-        break;
-      default:
-        console.error('Invalid filter value');
+        case 'utah':
+            displayTemples(templeList.filter(temple => temple.location.includes('Utah')));
+            break;
+        case 'notutah':
+            displayTemples(templeList.filter(temple => !temple.location.includes('Utah')));
+            break;
+        case 'older':
+            const cutoffDate = new Date(1950, 0, 1);
+            displayTemples(templeList.filter(temple => new Date(temple.dedicated) < cutoffDate));
+            break;
+        case 'all':
+            displayTemples(templeList);
+            break;
+        default:
+            console.error('Invalid filter value');
     }
-
-  
-
+};
 
 getTemples();
 
 /* Event Listener */
-
 const sortByElement = document.getElementById('sortBy');
 
-sortByElement.addEventListener('change', () => {
-  sortBy(templeList);
-});
-
-};
+sortByElement.addEventListener('change', sortBy);
