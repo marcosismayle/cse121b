@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch tile data from the JSON file
-    fetch('https://gist.githubusercontent.com/marcosismayle/44c29036d35f4d5d518eed4cdba298ba/raw/5bd27d5e36aeb5634060eaafb9bda2dbf2eb7749/tiles.json')
+    fetch('https://gist.githubusercontent.com/marcosismayle/44c29036d35f4d5d518eed4cdba298ba/raw/7704a5c2b13727becd1599bad5537d43289a26e8/construction_materials.json')
         .then(response => response.json())
         .then(tileData => {
-            // Log the fetched data to the console to check if it's correct
-            console.log(tileData);
-
             // Populate tile size and type options
             populateSelectOptions('tileSize', [...new Set(tileData.map(tile => tile.size))]);
             populateSelectOptions('tileType', [...new Set(tileData.map(tile => tile.type))]);
@@ -29,8 +26,7 @@ function calculateCost() {
     const tileSize = document.getElementById('tileSize').value;
     const tileType = document.getElementById('tileType').value;
 
-    // Fetch tile data from the JSON file
-    fetch('https://gist.githubusercontent.com/marcosismayle/44c29036d35f4d5d518eed4cdba298ba/raw/5bd27d5e36aeb5634060eaafb9bda2dbf2eb7749/tiles.json')
+    fetch('https://gist.githubusercontent.com/marcosismayle/44c29036d35f4d5d518eed4cdba298ba/raw/7704a5c2b13727becd1599bad5537d43289a26e8/construction_materials.json')
         .then(response => response.json())
         .then(tileData => {
             // Find the selected tile based on size and type
